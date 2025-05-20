@@ -13,7 +13,7 @@ model User {
   email     String   @unique
   password  String
   phone     String
-  role      Role // 'STUDENT', 'RESPONSIBLE', 'ADMIN'
+  role      Role
   orders    Order[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -25,12 +25,35 @@ model Product {
   id         String      @id @default(uuid())
   name       String
   price      Decimal     @db.Decimal(10, 2)
-  category   String
+  category   Category    @relation(fields: [categoryId], references: [id])
+  categoryId String
+  canteen    Canteen     @relation(fields: [canteenId], references: [id])
+  canteenId  String
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   orderItems OrderItem[]
 
   @@map("products")
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  products Product[]
+
+  @@map("categories")
+}
+
+model Canteen {
+  id        String    @id @default(uuid())
+  name      String
+  latitude  Float
+  longitude Float
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("canteens")
 }
 
 model Order {
