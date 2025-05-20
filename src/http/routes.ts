@@ -5,12 +5,16 @@ import { createProductController } from './controllers/create-product.controller
 import { createCategoryController } from './controllers/create-categoy.controller'
 import { createCanteenController } from './controllers/create-canteen.controller'
 import { createOrderController } from './controllers/create-order.controller'
+import { listCategoriesController } from './controllers/lis-categories.controller'
 
 export async function appRoutes(app: FastifyInstance) {
   app.post('/users', register)
   app.post('/sessions', authenticate)
   app.post('/products', createProductController)
-  app.post('/categories', createCategoryController)
   app.post('/canteens', createCanteenController)
   app.post('/orders', createOrderController)
+
+  // Categories
+  app.get('/categories', listCategoriesController)
+  app.post('/categories', createCategoryController)
 }
