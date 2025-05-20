@@ -25,4 +25,8 @@ export class InMemoryCategoriesRepository implements CategoriesRepository {
     const category = this.items.find((item) => item.name === name)
     return category ?? null
   }
+
+  async listCategories(): Promise<Category[]> {
+    return this.items
+  }
 }

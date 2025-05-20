@@ -30,4 +30,10 @@ export class PrismaCategoriesReporitory implements CategoriesRepository {
 
     return category
   }
+
+  async listCategories(): Promise<Category[]> {
+    const categories = await prisma.category.findMany()
+
+    return categories
+  }
 }
