@@ -13,7 +13,6 @@ export class PrismaProductsRepository implements ProductsRepository {
 
   async listProducts(): Promise<Product[]> {
     const products = await prisma.product.findMany()
-
     return products
   }
 
@@ -36,6 +35,24 @@ export class PrismaProductsRepository implements ProductsRepository {
   async listProductsByCategory(categoryId?: string): Promise<Product[]> {
     return await prisma.product.findMany({
       where: categoryId ? { categoryId } : undefined,
+    })
+  }
+
+  async update(
+    productId: string,
+    data: Prisma.ProductUpdateInput,
+  ): Promise<Product> {
+    const updatedProduct = await prisma.product.update({
+      where: { id: productId },
+      data,
+    })
+
+    return updatedProduct
+  }
+
+  async delete(productId: string): Promise<void> {
+    await prisma.product.delete({
+      where: { id: productId },
     })
   }
 }

@@ -9,6 +9,7 @@ import { listCategoriesController } from './controllers/lis-categories.controlle
 import { listProductsController } from './controllers/list-products.controller'
 import { listCanteensController } from './controllers/lis-canteens.controller'
 import { listOrdersController } from './controllers/list-orders.controller'
+import { deleteProductController } from './controllers/delete-products.controller'
 
 export async function appRoutes(app: FastifyInstance) {
   app.post('/users', register)
@@ -21,6 +22,7 @@ export async function appRoutes(app: FastifyInstance) {
   // Products
   app.post('/products', createProductController)
   app.get('/products', listProductsController)
+  app.delete('/products/:productId', deleteProductController)
 
   // Canteens
   app.post('/canteens', createCanteenController)
