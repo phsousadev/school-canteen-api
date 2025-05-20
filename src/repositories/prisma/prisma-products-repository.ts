@@ -32,4 +32,10 @@ export class PrismaProductsRepository implements ProductsRepository {
 
     return product
   }
+
+  async listProductsByCategory(categoryId?: string): Promise<Product[]> {
+    return await prisma.product.findMany({
+      where: categoryId ? { categoryId } : undefined,
+    })
+  }
 }

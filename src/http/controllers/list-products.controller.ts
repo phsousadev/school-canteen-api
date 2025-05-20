@@ -1,17 +1,23 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { makeListProductsUseCase } from '../use-cases/factories/make-list-products-use-case'
 
+interface ListProductsQuery {
+  categoryId?: string
+}
+
 export async function listProductsController(
-  request: FastifyRequest,
+  request: FastifyRequest<{ Querystring: ListProductsQuery }>,
   reply: FastifyReply,
 ) {
   try {
     const productUseCase = makeListProductsUseCase()
 
-    const products = await productUseCase.execute()
+    const { categoryId } = request.query
 
-    return products
-  } catch (err) {}
+    const products = await productUseCase.execute({ categoryId })
 
-  return reply.status(201).send()
+    return reply.status(200).send(products)
+  } catch (err) {
+    return reply.status(500).send({ message: 'Internal server error' })
+  }
 }
