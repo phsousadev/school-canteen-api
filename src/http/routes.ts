@@ -8,11 +8,11 @@ import { createOrderController } from './controllers/create-order.controller'
 import { listCategoriesController } from './controllers/lis-categories.controller'
 import { listProductsController } from './controllers/list-products.controller'
 import { listCanteensController } from './controllers/lis-canteens.controller'
+import { listOrdersController } from './controllers/list-orders.controller'
 
 export async function appRoutes(app: FastifyInstance) {
   app.post('/users', register)
   app.post('/sessions', authenticate)
-  app.post('/orders', createOrderController)
 
   // Categories
   app.get('/categories', listCategoriesController)
@@ -25,4 +25,8 @@ export async function appRoutes(app: FastifyInstance) {
   // Canteens
   app.post('/canteens', createCanteenController)
   app.get('/canteens', listCanteensController)
+
+  // Orders
+  app.post('/orders', createOrderController)
+  app.get('/orders', listOrdersController)
 }
