@@ -7,11 +7,11 @@ import { createCanteenController } from './controllers/create-canteen.controller
 import { createOrderController } from './controllers/create-order.controller'
 import { listCategoriesController } from './controllers/lis-categories.controller'
 import { listProductsController } from './controllers/list-products.controller'
+import { listCanteensController } from './controllers/lis-canteens.controller'
 
 export async function appRoutes(app: FastifyInstance) {
   app.post('/users', register)
   app.post('/sessions', authenticate)
-  app.post('/canteens', createCanteenController)
   app.post('/orders', createOrderController)
 
   // Categories
@@ -21,4 +21,8 @@ export async function appRoutes(app: FastifyInstance) {
   // Products
   app.post('/products', createProductController)
   app.get('/products', listProductsController)
+
+  // Canteens
+  app.post('/canteens', createCanteenController)
+  app.get('/canteens', listCanteensController)
 }
