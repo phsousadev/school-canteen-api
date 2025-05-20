@@ -1,19 +1,11 @@
-version: "3.9"
+version: '3'
 
 services:
-  mysql:
-    image: mysql:8.3
-    container_name: mysql_school
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: school_db
-      MYSQL_USER: school_user
-      MYSQL_PASSWORD: school_pass
+  api-solid-pg:
+    image: bitnami/postgresql
     ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-
-volumes:
-  mysql_data:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=school_user
+      - POSTGRESQL_PASSWORD=school_pass
+      - POSTGRESQL_DATABASE=school_db
