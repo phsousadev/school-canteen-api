@@ -24,24 +24,9 @@ export class PrismaOrdersRepository implements OrdersRepository {
     return order
   }
 
-  async listOrders(): Promise<Order[]> {
+  async listOrders(userId?: string): Promise<Order[]> {
     const orders = await prisma.order.findMany({
-      include: {
-        items: true,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-    })
-
-    return orders
-  }
-
-  async findByUserId(userId: string): Promise<Order[]> {
-    const orders = await prisma.order.findMany({
-      where: {
-        userId,
-      },
+      where: userId ? { userId } : {},
       include: {
         items: true,
       },
