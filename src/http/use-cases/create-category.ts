@@ -16,14 +16,13 @@ export class CreateCategoryUseCase {
   async execute({
     name,
   }: CategoryUseCaseRequest): Promise<CategoryUseCaseResponse> {
-    const category = await this.categoriesRepository.create({
-      name,
-    })
-
     const categoryAlreadyExists =
       await this.categoriesRepository.findCategoryByName(name)
 
     if (categoryAlreadyExists) throw new CategoryAlreadyExistsError()
+    const category = await this.categoriesRepository.create({
+      name,
+    })
 
     return {
       category,
