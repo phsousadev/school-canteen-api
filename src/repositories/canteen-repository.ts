@@ -1,6 +1,6 @@
 import { Prisma, Canteen } from '@prisma/client'
 
-export interface CanteensRepository {
+export interface CanteenRepository {
   create(data: Prisma.CanteenCreateInput): Promise<Canteen>
   findById(id: string): Promise<Canteen | null>
   findByName(name: string): Promise<Canteen | null>
