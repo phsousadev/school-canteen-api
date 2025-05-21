@@ -1,0 +1,503 @@
+type: collection.insomnia.rest/5.0
+name: school-canteen-api
+meta:
+  id: wrk_8bdb6ac966034f0ebd5617eef91f8bdf
+  created: 1747744338025
+  modified: 1747744338025
+collection:
+  - name: Users
+    meta:
+      id: fld_791dcc9081aa4fceacf2b61b1ae426b4
+      created: 1747744344050
+      modified: 1747774966115
+      sortKey: -1747744344050
+    children:
+      - url: "{{ _.base_url }}/users"
+        name: create-user
+        meta:
+          id: req_be5d052412c644c5ab06c81a9ab0c951
+          created: 1747744347893
+          modified: 1747801201794
+          isPrivate: false
+          sortKey: -1747744347893
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "name": "Pedro Sousa (Admin)",
+              "email": "pedro@gmail.com",
+              "password": "123456789",
+              "phone": "+5586994220588"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Sessions
+    meta:
+      id: fld_9f24242aa6674da3baeabc8e8032d72d
+      created: 1747755716667
+      modified: 1747774211141
+      sortKey: -1747755716667
+    children:
+      - url: "{{ _.base_url }}/sessions"
+        name: authenticate
+        meta:
+          id: req_325182b6fcc84122b3d6c9d568da20f6
+          created: 1747755721690
+          modified: 1747802480919
+          isPrivate: false
+          sortKey: -1747755721690
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "pedro@gmail.com",
+            	"password": "123456789"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: none
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/me"
+        name: profile
+        meta:
+          id: req_5b1086fba0cf4054812a082282e62604
+          created: 1747792128572
+          modified: 1747802610078
+          isPrivate: false
+          sortKey: -1747792128572
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiU1RVREVOVCIsInN1YiI6IjY0Zjg2Yjg5LWYwZWQtNDMyMy04MDAzLTIzZGU0NzVmNWRmMSIsImlhdCI6MTc0NzgwMjU3OSwiZXhwIjoxNzQ3ODAzMTc5fQ.MFsBe3MaMowIhuke17ZjOs03ydFz25xeaxxexlQokYQ
+          disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/token/refresh"
+        name: refresh
+        meta:
+          id: req_91066bc7915b488eb477cf2732c577a1
+          created: 1747794599093
+          modified: 1747794628322
+          isPrivate: false
+          sortKey: -1747750034791.5
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "pedro@gmail.com",
+            	"password": "123456789"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMjA5MmZmZC04NDk0LTRjNGMtYThhMy1hYzc0YmVhOWEzZjIiLCJpYXQiOjE3NDc3OTIwMzJ9.oOdAoX8wh6xw2JajzSuGHFftWp2DTE5wMnrZX78IBzY
+          disabled: true
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Products
+    meta:
+      id: fld_685228d1f95e4ad5a47f15ab78fe5aa6
+      created: 1747770383521
+      modified: 1747793828972
+      sortKey: -1747770383521
+    children:
+      - url: "{{ _.base_url }}/products"
+        name: create-products
+        meta:
+          id: req_7856c021ae9e4f0fa98408d2449a05cb
+          created: 1747772572657
+          modified: 1747795798315
+          isPrivate: false
+          sortKey: -1747772576134
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Enroladinho de Carne de Sol",
+            	"price": 1.50,
+            	"categoryId": "4aff47ab-a337-41e8-9e2b-0f7deb836c5c",
+            	"canteenId": "7bfdcef9-8cee-49b0-941d-8b0fdd199510"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiIxMmU4YTAxYS01ODQ1LTQxZWMtODY5NC02YzI4MjVkNzA5YTciLCJpYXQiOjE3NDc3OTU3OTQsImV4cCI6MTc0Nzc5NjM5NH0.Mh7HMV8558sFy5DXap9V1uRZsYZvGqVTuIDcsnJfo8Q
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/products"
+        name: list-products
+        meta:
+          id: req_53d5fcb5672b49b985d0c5fd60625cbd
+          created: 1747775472096
+          modified: 1747775481397
+          isPrivate: false
+          sortKey: -1747772576034
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/products"
+        name: list-products-by-categories
+        meta:
+          id: req_1b50e603963d4c17b2ba5fbc605a30d8
+          created: 1747778671181
+          modified: 1747779116432
+          isPrivate: false
+          sortKey: -1747772484348.5
+        method: GET
+        parameters:
+          - id: pair_b5e1c16d41c94933824c414e8ac3fdd6
+            name: categoryId
+            value: 4aff47ab-a337-41e8-9e2b-0f7deb836c5c
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/products/e79a777f-1797-447e-9d7e-bd4260ac2591"
+        name: delete-product
+        meta:
+          id: req_c31fa3a5d43747dcaf5c56a487a86a08
+          created: 1747781841523
+          modified: 1747781889622
+          isPrivate: false
+          sortKey: -1747781841523
+        method: DELETE
+        parameters:
+          - id: pair_b3bbdf41492b4f0cabbcdd5b0ea42d66
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/products/57006a63-b976-4fd8-908f-433c5a68d2cb"
+        name: update-product
+        meta:
+          id: req_91f23f3ee3544aa8807deb8824230dc7
+          created: 1747788222549
+          modified: 1747788459878
+          isPrivate: false
+          sortKey: -1747788222549
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "name": "Pastel de Frango - Atualizado",
+              "price": 14,
+              "categoryId": "4aff47ab-a337-41e8-9e2b-0f7deb836c5c",
+              "canteenId": "77fcab44-f51e-4a72-823c-566707487e24"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Categories
+    meta:
+      id: fld_6b41072d7ccb44a7b7ecea3acade1a69
+      created: 1747770389772
+      modified: 1747774214735
+      sortKey: -1747770389772
+    children:
+      - url: "{{ _.base_url }}/categories"
+        name: create-category
+        meta:
+          id: req_a35d983232334109ace369a8f030d5ae
+          created: 1747770406233
+          modified: 1747802078153
+          isPrivate: false
+          sortKey: -1747774969957
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "name": "Outros 4"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiIxMmU4YTAxYS01ODQ1LTQxZWMtODY5NC02YzI4MjVkNzA5YTciLCJpYXQiOjE3NDc4MDE0NzksImV4cCI6MTc0NzgwMjA3OX0.5STv7UiU1ILxn5AnN4E-r0Wudf85t_HZB-W9AI_cBrM
+          disabled: true
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/categories"
+        name: list-categories
+        meta:
+          id: req_531cedc9c74a4359a4bbdafc571c4670
+          created: 1747774969857
+          modified: 1747774985079
+          isPrivate: false
+          sortKey: -1747774969857
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Canteen
+    meta:
+      id: fld_ff5c305ed9524d7e8baca89545b58349
+      created: 1747772373524
+      modified: 1747793830937
+      sortKey: -1747772373524
+    children:
+      - url: "{{ _.base_url }}/canteens"
+        name: create-canteen
+        meta:
+          id: req_0e59e5118e77421392028e32a3170d1d
+          created: 1747772389271
+          modified: 1747776867033
+          isPrivate: false
+          sortKey: -1747772392663
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "name": "Boa Mesa Padaria",
+              "latitude": -23.55052,
+              "longitude": -46.633308
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/canteens"
+        name: list-canteens
+        meta:
+          id: req_0d6fe2217dfe4a1f90842af0c886772c
+          created: 1747775975528
+          modified: 1747775998219
+          isPrivate: false
+          sortKey: -1747772392563
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Orders
+    meta:
+      id: fld_becd166b83ed48e8b44a7cb6dfa69f33
+      created: 1747774221686
+      modified: 1747774221686
+      sortKey: -1747774221686
+    children:
+      - url: "{{ _.base_url }}/orders"
+        name: create-order
+        meta:
+          id: req_27369daac66f411ab73dc9a6fc80330f
+          created: 1747774235557
+          modified: 1747796063996
+          isPrivate: false
+          sortKey: -1747774238296
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "items": [
+                {
+                  "productId": "6247339d-6584-4b68-ba5d-dfb4e5c4020c",
+                  "quantity": 10,
+                  "unitPrice": 10
+                }
+              ]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiIxMmU4YTAxYS01ODQ1LTQxZWMtODY5NC02YzI4MjVkNzA5YTciLCJpYXQiOjE3NDc3OTU3OTQsImV4cCI6MTc0Nzc5NjM5NH0.Mh7HMV8558sFy5DXap9V1uRZsYZvGqVTuIDcsnJfo8Q
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/orders"
+        name: list-orders
+        meta:
+          id: req_fae5c79be57a404587f3ebb30b67d33b
+          created: 1747776449013
+          modified: 1747801345178
+          isPrivate: false
+          sortKey: -1747774238196
+        method: GET
+        parameters:
+          - id: pair_848d338992974ca6afe89b85997c4fe0
+            name: status
+            value: READY
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiIxMmU4YTAxYS01ODQ1LTQxZWMtODY5NC02YzI4MjVkNzA5YTciLCJpYXQiOjE3NDc3OTU3OTQsImV4cCI6MTc0Nzc5NjM5NH0.Mh7HMV8558sFy5DXap9V1uRZsYZvGqVTuIDcsnJfo8Q
+          disabled: true
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_f12d612735d2afba1c0495d39effb9dfaf821131
+    created: 1747744338030
+    modified: 1747802579738
+environments:
+  name: Base Environment
+  meta:
+    id: env_f12d612735d2afba1c0495d39effb9dfaf821131
+    created: 1747744338028
+    modified: 1747744377562
+    isPrivate: false
+  subEnvironments:
+    - name: develop
+      meta:
+        id: env_2657ea7240824abbaff17b27e5ae3a93
+        created: 1747744380868
+        modified: 1747801165084
+        isPrivate: false
+        sortKey: 1747744380868
+      data:
+        base_url: http://localhost:3001
+      color: "#0011ff"
+    - name: production
+      meta:
+        id: env_ca037beea2d34c32b59be0140a84184c
+        created: 1747801137559
+        modified: 1747801172594
+        isPrivate: false
+        sortKey: 1747801137559
+      data:
+        base_url: https://school-canteen-api.onrender.com
+      color: "#1eff00"
