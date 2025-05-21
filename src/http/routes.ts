@@ -5,9 +5,9 @@ import { createProductController } from './controllers/create-product.controller
 import { createCategoryController } from './controllers/create-categoy.controller'
 import { createCanteenController } from './controllers/create-canteen.controller'
 import { createOrderController } from './controllers/create-order.controller'
-import { listCategoriesController } from './controllers/lis-categories.controller'
+import { listCategoriesController } from './controllers/list-categories.controller'
 import { listProductsController } from './controllers/list-products.controller'
-import { listCanteensController } from './controllers/lis-canteens.controller'
+import { listCanteensController } from './controllers/list-canteens.controller'
 import { listOrdersController } from './controllers/list-orders.controller'
 import { deleteProductController } from './controllers/delete-products.controller'
 import { updateProductController } from './controllers/update-products.controller'
@@ -15,30 +15,31 @@ import { profileController } from './controllers/profile.controller'
 import { verifyJwt } from './middlewares/verify-jwt'
 
 export async function appRoutes(app: FastifyInstance) {
-  // Users
   app.post('/users', register)
-
-  // Sessions
   app.post('/sessions', authenticate)
 
-  // Categories
-  app.get('/categories', listCategoriesController)
-  app.post('/categories', createCategoryController)
+  app.register(async (privateRoutes) => {
+    privateRoutes.addHook('onRequest', verifyJwt)
 
-  // Products
-  app.post('/products', createProductController)
-  app.get('/products', listProductsController)
-  app.delete('/products/:productId', deleteProductController)
-  app.put('/products/:productId', updateProductController)
+    // Categories
+    privateRoutes.get('/categories', listCategoriesController)
+    privateRoutes.post('/categories', createCategoryController)
 
-  // Canteens
-  app.post('/canteens', createCanteenController)
-  app.get('/canteens', listCanteensController)
+    // Products
+    privateRoutes.post('/products', createProductController)
+    privateRoutes.get('/products', listProductsController)
+    privateRoutes.delete('/products/:productId', deleteProductController)
+    privateRoutes.put('/products/:productId', updateProductController)
 
-  // Orders
-  app.post('/orders', createOrderController)
-  app.get('/orders', listOrdersController)
+    // Canteens
+    privateRoutes.post('/canteens', createCanteenController)
+    privateRoutes.get('/canteens', listCanteensController)
 
-  /** Authenticated */
-  app.get('/me', { onRequest: [verifyJwt] }, profileController)
+    // Orders
+    privateRoutes.post('/orders', createOrderController)
+    privateRoutes.get('/orders', listOrdersController)
+
+    // Profile
+    privateRoutes.get('/me', profileController)
+  })
 }
