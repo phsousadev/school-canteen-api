@@ -11,6 +11,8 @@ import { listCanteensController } from './controllers/lis-canteens.controller'
 import { listOrdersController } from './controllers/list-orders.controller'
 import { deleteProductController } from './controllers/delete-products.controller'
 import { updateProductController } from './controllers/update-products.controller'
+import { profileController } from './controllers/profile.controller'
+import { verifyJwt } from './middlewares/verify-jwt'
 
 export async function appRoutes(app: FastifyInstance) {
   // Users
@@ -36,4 +38,7 @@ export async function appRoutes(app: FastifyInstance) {
   // Orders
   app.post('/orders', createOrderController)
   app.get('/orders', listOrdersController)
+
+  /** Authenticated */
+  app.get('/me', { onRequest: [verifyJwt] }, profileController)
 }
