@@ -1,6 +1,7 @@
 {
   "name": "school-canteen-api",
   "version": "1.0.0",
+  "type": "module",
   "description": "Projeto full stack desenvolvido para gerenciar pedidos de uma cantina escolar.",
   "main": "index.js",
   "scripts": {
