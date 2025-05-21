@@ -13,10 +13,12 @@ import { deleteProductController } from './controllers/delete-products.controlle
 import { updateProductController } from './controllers/update-products.controller'
 import { profileController } from './controllers/profile.controller'
 import { verifyJwt } from './middlewares/verify-jwt'
+import { refresh } from './controllers/refresh.controller'
 
 export async function appRoutes(app: FastifyInstance) {
   app.post('/users', register)
   app.post('/sessions', authenticate)
+  app.patch('/token/refresh', refresh)
 
   app.register(async (privateRoutes) => {
     privateRoutes.addHook('onRequest', verifyJwt)
