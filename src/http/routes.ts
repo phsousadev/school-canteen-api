@@ -17,6 +17,10 @@ import { refresh } from './controllers/refresh.controller'
 import { verifyUserRole } from './middlewares/verify-user-role'
 
 export async function appRoutes(app: FastifyInstance) {
+  app.get('/', async (request, reply) => {
+    reply.send({ message: '🍽️ Bem-vindo à School Canteen API' })
+  })
+
   app.post('/users', register)
   app.post('/sessions', authenticate)
   app.patch('/token/refresh', refresh)
