@@ -1,51 +1,43 @@
-# 🍽️ Sistema de Cantina Escolar
+# 🍽️ School Canteen API
 
-Projeto full stack desenvolvido para gerenciar pedidos de uma cantina escolar. O sistema possui dois ambientes:
-
-- 👨‍🎓 Ambiente do Usuário (Alunos e Responsáveis)
-- 🧑‍💼 Ambiente Administrativo (Gestores da Cantina)
+API desenvolvida como parte de um desafio Full Stack com o objetivo de gerenciar **pedidos de uma cantina escolar**. Este backend robusto é a espinha dorsal de uma solução moderna, escalável e em tempo real para dois tipos de usuários: **alunos/responsáveis** e **administradores da cantina**.
 
 ---
 
-## 📌 Funcionalidades
+## 💡 Visão Geral
 
-### 👨‍🎓 Ambiente do Usuário
-- Cadastro e login (com autenticação via JWT)
-- Visualização de cardápio por categorias (lanches, bebidas, doces, etc)
-- Adição de produtos ao carrinho
-- Finalização e confirmação de pedido
-- Histórico de pedidos realizados
+O sistema contempla **dois ambientes distintos**:
 
-### 🧑‍💼 Ambiente Administrativo
-- Login de administrador
-- Cadastro, edição e exclusão de produtos do cardápio
-- Visualização em tempo real dos pedidos (painel de cozinha)
-- Filtro de pedidos por status: pendente, em preparo, pronto, entregue
-- Relatórios de vendas por data, produto e usuário
+- 👨‍🎓 **Ambiente do Usuário**: onde alunos e responsáveis podem se cadastrar, visualizar o cardápio, fazer pedidos e acompanhar seu histórico.
+- 🧑‍💼 **Ambiente Administrativo**: onde administradores gerenciam produtos, acompanham os pedidos em tempo real e extraem relatórios de vendas.
 
 ---
 
 ## ⚙️ Tecnologias Utilizadas
 
-### 🔧 Backend
-- Node.js
-- Express.js
-- MySQL
-- JWT para autenticação
-- WebSocket (para atualização em tempo real dos pedidos)
-- TypeORM (ORM para MySQL)
+Este projeto foi construído com foco em escalabilidade, manutenibilidade e boas práticas:
 
-### 💻 Frontend
-- React.js
-- Context API + React Query
-- Chart.js (dashboard de vendas)
+- 🟢 **Node.js** — Plataforma principal do backend.
+- ⚡ **Fastify** — Framework web ultrarrápido e extensível.
+- 🧪 **Vitest** — Testes unitários de alta performance com excelente DX.
+- 🐘 **MySQL** — Banco de dados relacional robusto.
+- 🔐 **JWT** — Autenticação segura baseada em tokens.
+- 🧭 **Prisma ORM** — Acesso a banco de dados com tipagem forte.
+- 🐳 **Docker** — Ambiente isolado e reproduzível.
+- 💬 **WebSocket** — Atualizações em tempo real dos pedidos.
+- 👮‍♂️ **RBAC (Role-Based Access Control)** — Controle de acesso por cargo.
+- 🔐 **CASL** — Controle granular de permissões.
+- 🧹 **ESLint** — Linting de código com regras padronizadas.
+- 🛠️ **CI com GitHub Actions** — Pipeline automatizado de testes.
+- 🧠 **S.O.L.I.D Principles** — Arquitetura orientada a boas práticas de design de software.
 
 ---
 
-## 📊 Extras Implementados
-- 📡 Notificações em tempo real via WebSocket
-- 📈 Dashboard com gráficos de vendas
-- 🔒 Controle de permissões com CASL
+## ✨ Diferenciais Implementados
+
+- 📡 **Notificações em tempo real** para a cozinha visualizar novos pedidos imediatamente.
+- 📈 **Dashboard administrativo com gráficos** de vendas e status de pedidos.
+- 🔒 **Controle de permissões detalhado** com CASL, para proteger e modularizar as regras de negócio.
 
 ---
 
@@ -54,5 +46,5 @@ Projeto full stack desenvolvido para gerenciar pedidos de uma cantina escolar. O
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seuusuario/sistema-cantina-escolar.git
-cd sistema-cantina-escolar
+git clone https://github.com/phsousadev/school-canteen-api.git
+
