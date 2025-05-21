@@ -10,7 +10,7 @@
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
-    "build": "tsup src/**/*.ts --out-dir build --format cjs --target es2020 --external vitest --clean --sourcemap --skip-node-modules-bundle",
+     "build": "tsup src --out-dir build",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
