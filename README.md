@@ -15,7 +15,6 @@ API para gerenciar pedidos de uma cantina escolar, com dois perfis de usuários:
 - 🐳 **Docker** — Ambiente isolado e reproduzível.
 - 💬 **WebSocket** — Atualizações em tempo real dos pedidos.
 - 👮‍♂️ **RBAC (Role-Based Access Control)** — Controle de acesso por cargo.
-- 🔐 **CASL** — Controle granular de permissões.
 - 🧹 **ESLint** — Linting de código com regras padronizadas.
 - 🛠️ **CI com GitHub Actions** — Pipeline automatizado de testes.
 - 🧠 **S.O.L.I.D Principles** — Arquitetura orientada a boas práticas de design de software.
