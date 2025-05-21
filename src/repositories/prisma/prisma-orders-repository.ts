@@ -1,6 +1,6 @@
 import { Order, OrderStatus, Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
-import { OrdersRepository } from '../orders-repository'
+import { OrderResponse, OrdersRepository } from '../orders-repository'
 
 export class PrismaOrdersRepository implements OrdersRepository {
   async create(data: Prisma.OrderCreateInput): Promise<Order> {
@@ -24,20 +24,55 @@ export class PrismaOrdersRepository implements OrdersRepository {
     return order
   }
 
-  async listOrders(userId?: string, status?: OrderStatus): Promise<Order[]> {
+  async listOrders(
+    userId?: string,
+    status?: OrderStatus,
+  ): Promise<OrderResponse[]> {
     const orders = await prisma.order.findMany({
       where: {
         ...(userId && { userId }),
         ...(status && { status }),
       },
-      include: {
-        items: true,
+      select: {
+        id: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+          },
+        },
+
+        items: {
+          select: {
+            id: true,
+            quantity: true,
+            unitPrice: true,
+            product: {
+              select: {
+                id: true,
+                name: true,
+                price: true,
+                category: {
+                  select: {
+                    id: true,
+                    name: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       orderBy: {
         createdAt: 'desc',
       },
     })
-
     return orders
   }
 }
