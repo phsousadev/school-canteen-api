@@ -1,6 +1,6 @@
 import { Prisma, Product } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
-import { ProductsRepository } from '../products-repository'
+import { ProductsRepository, UpdateProductInput } from '../products-repository'
 
 export class PrismaProductsRepository implements ProductsRepository {
   async create(data: Prisma.ProductCreateInput): Promise<Product> {
@@ -38,16 +38,20 @@ export class PrismaProductsRepository implements ProductsRepository {
     })
   }
 
-  async update(
-    productId: string,
-    data: Prisma.ProductUpdateInput,
-  ): Promise<Product> {
-    const updatedProduct = await prisma.product.update({
+  async update(productId: string, data: UpdateProductInput): Promise<Product> {
+    return await prisma.product.update({
       where: { id: productId },
-      data,
+      data: {
+        name: data.name,
+        price: data.price,
+        category: {
+          connect: { id: data.categoryId },
+        },
+        canteen: {
+          connect: { id: data.canteenId },
+        },
+      },
     })
-
-    return updatedProduct
   }
 
   async delete(productId: string): Promise<void> {
