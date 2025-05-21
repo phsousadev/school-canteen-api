@@ -1,20 +1,47 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
+import { z } from 'zod'
 import { makeListOrdersUseCase } from '../use-cases/factories/make-list-orders-use-case'
-
-interface ListOrdersQuery {
-  userId?: string
-}
+import { OrderStatus } from '@prisma/client'
 
 export async function listOrdersController(
-  request: FastifyRequest<{ Querystring: ListOrdersQuery }>,
+  request: FastifyRequest,
   reply: FastifyReply,
 ) {
+  const rawQuerySchema = z.object({
+    userId: z.string().optional(),
+    status: z.string().optional(),
+  })
+
+  const validStatuses = [
+    'PENDING',
+    'IN_PREPARATION',
+    'READY',
+    'DELIVERED',
+  ] as const
+
   try {
+    const { userId, status } = rawQuerySchema.parse(request.query)
+
+    let parsedStatus: OrderStatus | undefined
+
+    if (status) {
+      const upperCased = status.toUpperCase()
+
+      if (!validStatuses.includes(upperCased as OrderStatus)) {
+        return reply.status(400).send({
+          message: `Invalid status. Expected one of: ${validStatuses.join(', ')}`,
+        })
+      }
+
+      parsedStatus = upperCased as OrderStatus
+    }
+
     const orderUseCase = makeListOrdersUseCase()
 
-    const { userId } = request.query
-
-    const orders = await orderUseCase.execute({ userId })
+    const orders = await orderUseCase.execute({
+      userId,
+      status: parsedStatus,
+    })
 
     return reply.status(200).send(orders)
   } catch (err) {

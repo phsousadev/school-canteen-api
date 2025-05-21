@@ -22,11 +22,6 @@ export async function updateProductController(
   const data = bodySchema.parse(request.body)
 
   try {
-    console.log('Cheguie')
-    console.log('Cheguie')
-    console.log('Cheguie')
-    console.log('Cheguie')
-
     const productUseCase = makeUpdateProductsUseCase()
 
     const { product } = await productUseCase.execute({

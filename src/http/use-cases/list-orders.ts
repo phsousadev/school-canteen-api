@@ -1,8 +1,9 @@
-import { Order } from '@prisma/client'
+import { Order, OrderStatus } from '@prisma/client'
 import { OrdersRepository } from '@/repositories/orders-repository'
 
 interface ListOrdersRequest {
   userId?: string
+  status?: OrderStatus
 }
 
 interface ListOrdersResponse {
@@ -14,8 +15,9 @@ export class ListOrdersUseCase {
 
   async execute({
     userId,
+    status,
   }: ListOrdersRequest = {}): Promise<ListOrdersResponse> {
-    const orders = await this.ordersRepository.listOrders(userId)
+    const orders = await this.ordersRepository.listOrders(userId, status)
 
     return {
       orders,
