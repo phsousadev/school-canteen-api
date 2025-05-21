@@ -90,7 +90,13 @@ docker compose up -d
 npm install
 ```
 
-### 5. Criando o arquivo `.env`
+### 5. Execute o projeto
+
+```bash
+npm run start:dev
+```
+
+### 6. Criando o arquivo `.env`
 
 Copie o arquivo `.env.example` para um novo arquivo `.env` na raiz do projeto, mantendo as mesmas configurações iniciais:
 
