@@ -17,4 +17,4 @@ jobs:
 
       - run: npm ci
 
-      - npm run test:unitary
+      - run: npm test:unitary
