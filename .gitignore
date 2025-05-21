@@ -145,3 +145,6 @@ dist
 
 # Test
 coverage
+
+# Build
+build
