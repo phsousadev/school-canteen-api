@@ -1,11 +1,16 @@
 import fastify from 'fastify'
 import fastifyJwt from '@fastify/jwt'
 import fastifyCookie from '@fastify/cookie'
+import cors from '@fastify/cors'
 import { appRoutes } from './http/routes'
 import { ZodError } from 'zod'
 import { env } from './env'
 
 export const app = fastify()
+
+app.register(cors, {
+  origin: true,
+})
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
