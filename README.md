@@ -102,5 +102,5 @@ cp .env.example .env
 Execute: 
 
 ```bash
-npm run test
+npm run test:unitary
 ```
