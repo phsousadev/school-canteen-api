@@ -4,6 +4,9 @@
   "type": "module",
   "description": "Projeto full stack desenvolvido para gerenciar pedidos de uma cantina escolar.",
   "main": "index.js",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
