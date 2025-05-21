@@ -25,8 +25,12 @@ export async function appRoutes(app: FastifyInstance) {
     privateRoutes.addHook('onRequest', verifyJwt)
 
     // Categories
+    privateRoutes.post(
+      '/categories',
+      { onRequest: [verifyUserRole('ADMIN')] },
+      createCategoryController,
+    )
     privateRoutes.get('/categories', listCategoriesController)
-    privateRoutes.post('/categories', createCategoryController)
 
     // Products
     privateRoutes.post(
