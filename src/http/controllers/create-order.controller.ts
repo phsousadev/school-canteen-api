@@ -8,7 +8,6 @@ export async function createOrderController(
   reply: FastifyReply,
 ) {
   const createOrderBodySchema = z.object({
-    userId: z.string().uuid(),
     items: z
       .array(
         z.object({
@@ -20,7 +19,9 @@ export async function createOrderController(
       .min(1),
   })
 
-  const { userId, items } = createOrderBodySchema.parse(request.body)
+  const { items } = createOrderBodySchema.parse(request.body)
+
+  const userId = request.user.sub
 
   try {
     const createOrderUseCase = makeOrderUseCase()

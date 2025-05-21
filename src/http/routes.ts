@@ -14,6 +14,7 @@ import { updateProductController } from './controllers/update-products.controlle
 import { profileController } from './controllers/profile.controller'
 import { verifyJwt } from './middlewares/verify-jwt'
 import { refresh } from './controllers/refresh.controller'
+import { verifyUserRole } from './middlewares/verify-user-role'
 
 export async function appRoutes(app: FastifyInstance) {
   app.post('/users', register)
@@ -28,13 +29,29 @@ export async function appRoutes(app: FastifyInstance) {
     privateRoutes.post('/categories', createCategoryController)
 
     // Products
-    privateRoutes.post('/products', createProductController)
+    privateRoutes.post(
+      '/products',
+      { onRequest: [verifyUserRole('ADMIN')] },
+      createProductController,
+    )
     privateRoutes.get('/products', listProductsController)
-    privateRoutes.delete('/products/:productId', deleteProductController)
-    privateRoutes.put('/products/:productId', updateProductController)
+    privateRoutes.delete(
+      '/products/:productId',
+      { onRequest: [verifyUserRole('ADMIN')] },
+      deleteProductController,
+    )
+    privateRoutes.put(
+      '/products/:productId',
+      { onRequest: [verifyUserRole('ADMIN')] },
+      updateProductController,
+    )
 
     // Canteens
-    privateRoutes.post('/canteens', createCanteenController)
+    privateRoutes.post(
+      '/canteens',
+      { onRequest: [verifyUserRole('ADMIN')] },
+      createCanteenController,
+    )
     privateRoutes.get('/canteens', listCanteensController)
 
     // Orders

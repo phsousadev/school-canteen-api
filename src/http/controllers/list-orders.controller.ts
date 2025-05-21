@@ -8,7 +8,6 @@ export async function listOrdersController(
   reply: FastifyReply,
 ) {
   const rawQuerySchema = z.object({
-    userId: z.string().optional(),
     status: z.string().optional(),
   })
 
@@ -20,7 +19,9 @@ export async function listOrdersController(
   ] as const
 
   try {
-    const { userId, status } = rawQuerySchema.parse(request.query)
+    const { status } = rawQuerySchema.parse(request.query)
+
+    const userId = request.user.sub
 
     let parsedStatus: OrderStatus | undefined
 
