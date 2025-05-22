@@ -13,7 +13,6 @@ API para gerenciar pedidos de uma cantina escolar, com dois perfis de usuários:
 - 🔐 **JWT** — Autenticação segura baseada em tokens.
 - 🧭 **Prisma ORM** — Acesso a banco de dados com tipagem forte.
 - 🐳 **Docker** — Ambiente isolado e reproduzível.
-- 💬 **WebSocket** — Atualizações em tempo real dos pedidos.
 - 👮‍♂️ **RBAC (Role-Based Access Control)** — Controle de acesso por cargo.
 - 🧹 **ESLint** — Linting de código com regras padronizadas.
 - 🛠️ **CI com GitHub Actions** — Pipeline automatizado de testes.
