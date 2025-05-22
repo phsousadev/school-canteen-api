@@ -20,14 +20,6 @@ API para gerenciar pedidos de uma cantina escolar, com dois perfis de usuários:
 
 ---
 
-## ✨ Diferenciais
-
-- 📡 Notificações em tempo real para cozinha.
-- 📈 Dashboard administrativo com gráficos.
-- 🔒 Controle granular de permissões com CASL.
-
----
-
 ## 💻 Requisitos Básicos
 
 Antes de rodar o projeto, certifique-se de ter instalado na sua máquina:
