@@ -9,7 +9,7 @@ API para gerenciar pedidos de uma cantina escolar, com dois perfis de usuários:
 - 🟢 **Node.js** — Plataforma principal do backend.
 - ⚡ **Fastify** — Framework web ultrarrápido e extensível.
 - 🧪 **Vitest** — Testes unitários de alta performance com excelente DX.
-- 🐘 **MySQL** — Banco de dados relacional robusto.
+- 🐘 **PostegreSQL** — Banco de dados relacional robusto.
 - 🔐 **JWT** — Autenticação segura baseada em tokens.
 - 🧭 **Prisma ORM** — Acesso a banco de dados com tipagem forte.
 - 🐳 **Docker** — Ambiente isolado e reproduzível.
