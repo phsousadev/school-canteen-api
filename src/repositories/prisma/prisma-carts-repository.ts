@@ -1,21 +1,43 @@
-import { Cart, CartItem, Prisma } from '@prisma/client'
+import { Cart, CartItem, Category, Prisma, Product } from '@prisma/client'
 import { CartsRepository } from '../carts-repository'
 import { prisma } from '@/lib/prisma'
 
 export class PrismaCartsRepository implements CartsRepository {
-  async findByUserId(
-    userId: string,
-  ): Promise<(Cart & { items: CartItem[] }) | null> {
-    let cart: (Cart & { items: CartItem[] }) | null =
-      await prisma.cart.findUnique({
-        where: { userId },
-        include: { items: true },
+  async findByUserId(userId: string): Promise<
+    | (Cart & {
+        items: (CartItem & { product: Product & { category: Category } })[]
       })
+    | null
+  > {
+    let cart = await prisma.cart.findUnique({
+      where: { userId },
+      include: {
+        items: {
+          include: {
+            product: {
+              include: {
+                category: true,
+              },
+            },
+          },
+        },
+      },
+    })
 
     if (!cart) {
       cart = await prisma.cart.create({
         data: { userId },
-        include: { items: true },
+        include: {
+          items: {
+            include: {
+              product: {
+                include: {
+                  category: true,
+                },
+              },
+            },
+          },
+        },
       })
     }
 
