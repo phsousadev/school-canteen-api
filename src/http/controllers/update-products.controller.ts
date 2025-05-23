@@ -1,6 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
-import { ProductAlreadyExistsError } from '../use-cases/errors/product-already-exists-error'
 import { makeUpdateProductsUseCase } from '../use-cases/factories/make-update-product-use-case'
 
 export async function updateProductController(
@@ -31,10 +30,6 @@ export async function updateProductController(
 
     return reply.status(200).send(product)
   } catch (err) {
-    if (err instanceof ProductAlreadyExistsError) {
-      return reply.status(409).send({ message: err.message })
-    }
-
-    throw err
+    throw new Error()
   }
 }

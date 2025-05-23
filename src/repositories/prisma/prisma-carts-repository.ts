@@ -86,11 +86,15 @@ export class PrismaCartsRepository implements CartsRepository {
     productId: string,
   ): Promise<(Cart & { items: CartItem[] }) | null> {
     const cart = await this.findByUserId(userId)
+
     if (!cart) return null
 
+    console.log(typeof productId)
+
     const cartItem: CartItem | undefined = cart.items.find(
-      (item) => item.productId === productId,
+      (item) => item.id === productId,
     )
+
     if (!cartItem) return null
 
     await prisma.cartItem.delete({
@@ -113,6 +117,7 @@ export class PrismaCartsRepository implements CartsRepository {
     const cart: Cart | null = await prisma.cart.findUnique({
       where: { userId },
     })
+
     if (!cart) return
 
     await prisma.cartItem.deleteMany({
