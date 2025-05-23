@@ -19,6 +19,7 @@ import { addItemToCartController } from './controllers/create-shopping-cart.cont
 import { viewShoppingCartController } from './controllers/view-shopping-card.controller'
 import { updateCartItemQuantityController } from './controllers/update-shopping-cart.controller'
 import { removeItemShoppingCart } from './controllers/remove-item-shopping-cart.controller'
+import { checkoutCartController } from './controllers/checkout.controller'
 
 export async function appRoutes(app: FastifyInstance) {
   app.get('/', async (request, reply) => {
@@ -68,6 +69,7 @@ export async function appRoutes(app: FastifyInstance) {
 
     // Shopping cart
     privateRoutes.post('/shopping-carts', addItemToCartController)
+    privateRoutes.post('/shopping-carts/checkout', checkoutCartController)
     privateRoutes.get('/shopping-carts', viewShoppingCartController)
     privateRoutes.put('/shopping-carts', updateCartItemQuantityController)
     privateRoutes.delete('/shopping-carts/:productId', removeItemShoppingCart)
