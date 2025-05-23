@@ -7,6 +7,7 @@ export async function viewShoppingCartController(
   reply: FastifyReply,
 ) {
   const userId = request.user.sub
+
   try {
     const shoppingCartUseCase = makeShoppingCartUseCase()
 
