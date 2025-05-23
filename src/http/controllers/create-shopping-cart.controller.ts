@@ -1,20 +1,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { ProductNotFoundError } from '../use-cases/errors/product-not-found-error'
-import { CartItem } from '@prisma/client'
 import { makeShoppingCartUseCase } from '../use-cases/factories/make-shopping-cart-use-case'
-
-function calculateCartTotals(items: CartItem[]): {
-  totalItems: number
-  totalPrice: number
-} {
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
-  const totalPrice = items.reduce(
-    (sum, item) => sum + item.unitPrice.toNumber() * item.quantity,
-    0,
-  )
-  return { totalItems, totalPrice: parseFloat(totalPrice.toFixed(2)) }
-}
+import { calculateCartTotals } from '@/utils/calculate-cart-total.utils'
 
 export async function addItemToCartController(
   request: FastifyRequest,

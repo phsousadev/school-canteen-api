@@ -16,6 +16,7 @@ import { verifyJwt } from './middlewares/verify-jwt'
 import { refresh } from './controllers/refresh.controller'
 import { verifyUserRole } from './middlewares/verify-user-role'
 import { addItemToCartController } from './controllers/create-shopping-cart.controller'
+import { viewShoppingCartController } from './controllers/view-shopping-card.controller'
 
 export async function appRoutes(app: FastifyInstance) {
   app.get('/', async (request, reply) => {
@@ -65,6 +66,7 @@ export async function appRoutes(app: FastifyInstance) {
 
     // Shopping cart
     privateRoutes.post('/shopping-carts', addItemToCartController)
+    privateRoutes.get('/shopping-carts', viewShoppingCartController)
 
     // Orders
     privateRoutes.post('/orders', createOrderController)
