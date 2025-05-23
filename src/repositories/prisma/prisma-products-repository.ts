@@ -12,7 +12,11 @@ export class PrismaProductsRepository implements ProductsRepository {
   }
 
   async listProducts(): Promise<Product[]> {
-    const products = await prisma.product.findMany()
+    const products = await prisma.product.findMany({
+      include: {
+        category: true,
+      },
+    })
     return products
   }
 
