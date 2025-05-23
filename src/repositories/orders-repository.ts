@@ -1,4 +1,5 @@
 import { Prisma, Order, OrderStatus } from '@prisma/client'
+
 interface ProductCategory {
   id: string
   name: string
@@ -38,4 +39,8 @@ export interface OrdersRepository {
   create(data: Prisma.OrderCreateInput): Promise<Order>
   findById(id: string): Promise<Order | null>
   listOrders(userId?: string, status?: OrderStatus): Promise<OrderResponse[]>
+  createOrderWithItems(
+    userId: string,
+    items: { productId: string; quantity: number; unitPrice: Prisma.Decimal }[],
+  ): Promise<Order>
 }

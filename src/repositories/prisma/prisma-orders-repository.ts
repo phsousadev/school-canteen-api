@@ -73,6 +73,35 @@ export class PrismaOrdersRepository implements OrdersRepository {
         createdAt: 'desc',
       },
     })
-    return orders
+    return orders as unknown as OrderResponse[]
+  }
+
+  async createOrderWithItems(
+    userId: string,
+    items: { productId: string; quantity: number; unitPrice: Prisma.Decimal }[],
+  ): Promise<Order> {
+    const newOrder = await prisma.$transaction(async (prismaTx) => {
+      const order = await prismaTx.order.create({
+        data: {
+          userId,
+          status: 'PENDING',
+        },
+      })
+
+      const orderItemsData = items.map((item) => ({
+        orderId: order.id,
+        productId: item.productId,
+        quantity: item.quantity,
+        unitPrice: item.unitPrice,
+      }))
+
+      await prismaTx.orderItem.createMany({
+        data: orderItemsData,
+      })
+
+      return order
+    })
+
+    return newOrder
   }
 }

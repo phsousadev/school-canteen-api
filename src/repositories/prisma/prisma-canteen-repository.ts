@@ -1,8 +1,8 @@
 import { Prisma, Canteen } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
-import { CanteensRepository } from '../canteen-repository'
+import { CanteenRepository } from '../canteen-repository'
 
-export class PrismaCanteenRepository implements CanteensRepository {
+export class PrismaCanteenRepository implements CanteenRepository {
   async create(data: Prisma.CanteenCreateInput): Promise<Canteen> {
     const canteen = await prisma.canteen.create({
       data,
